@@ -6,37 +6,37 @@ export default function FeaturesSection() {
     {
       icon: Brain,
       title: "مساعد ذكي بالذكاء الاصطناعي",
-      description: "مساعد شخصي يدعم العربية والإنجليزية، يجيب على أسئلتك ويساعدك في فهم المواد الدراسية بطريقة تفاعلية",
+      description: "مساعد شخصي مدعوم بـ GPT-4، يفهم السياق الأكاديمي ويجيب على أسئلتك بشكل شامل وسهل الفهم",
       gradient: "from-secondary to-accent"
     },
     {
       icon: FileText,
-      title: "معالجة المستندات الذكية",
-      description: "ارفع ملفات PDF و DOCX واحصل على ملخصات فورية، بطاقات دراسية تلقائية، وتحليل شامل للمحتوى",
+      title: "تحليل وملخصات ذكية",
+      description: "ارفع ملفات PDF والمستندات واحصل على ملخصات تلقائية، نقاط رئيسية، وتحليل عميق للمحتوى",
       gradient: "from-accent to-secondary"
     },
     {
       icon: CreditCard,
-      title: "بطاقات دراسية تفاعلية",
-      description: "نظام متقدم للبطاقات الدراسية مع تقنية التكرار المتباعد لضمان حفظ أطول وفهم أعمق",
+      title: "توليد الأسئلة والاختبارات",
+      description: "أنشئ كويزات واختبارات تفاعلية تلقائياً من مواد دراستك مع أنواع متعددة من الأسئلة",
       gradient: "from-secondary to-accent"
     },
     {
       icon: TrendingUp,
-      title: "تتبع التقدم الذكي",
-      description: "لوحة تحكم شاملة لمراقبة تقدمك الأكاديمي، مع تحليلات متقدمة وتوصيات شخصية لتحسين الأداء",
+      title: "تحليل الأداء والتوصيات",
+      description: "تتبع تقدمك الأكاديمي مع تحليلات ذكية وتوصيات شخصية لتحسين نقاط ضعفك",
       gradient: "from-accent to-secondary"
     },
     {
       icon: Calendar,
-      title: "منظم الجلسات الدراسية",
-      description: "خطط جلساتك الدراسية بذكاء مع تكامل التقويم، تذكيرات ذكية، ونظام إدارة الوقت الأمثل",
+      title: "خطة دراسية ذكية",
+      description: "احصل على خطة دراسية مخصصة تتكيف مع وقتك وسرعة تعلمك مع تذكيرات ذكية",
       gradient: "from-secondary to-accent"
     },
     {
       icon: Shield,
-      title: "كاشف الانتحال",
-      description: "تأكد من أصالة أعمالك الأكاديمية مع نظام متطور لكشف الانتحال وضمان النزاهة الأكاديمية",
+      title: "مكتبة رقمية متكاملة",
+      description: "مستودع شامل لجميع مواد الجامعة الافتراضية مع أدوات بحث متقدمة وتصنيف ذكي",
       gradient: "from-accent to-secondary"
     }
   ];
@@ -45,9 +45,9 @@ export default function FeaturesSection() {
     <section id="features" className="py-20 bg-card">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-4 gradient-text">ميزات متقدمة لتعلم أفضل</h2>
+          <h2 className="text-5xl font-bold mb-4 gradient-text">أدوات الذكاء الاصطناعي المتقدمة</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            اكتشف مجموعة شاملة من الأدوات الذكية المصممة لتعزيز تجربتك التعليمية
+            مجموعة شاملة من الأدوات الذكية التي تدمج الذكاء الاصطناعي في كل جانب من جوانب دراستك
           </p>
         </div>
 

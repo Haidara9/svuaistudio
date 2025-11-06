@@ -7,7 +7,9 @@ import { useAuth } from "@/hooks/useAuth";
 import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
-import Documents from "@/pages/documents";
+import EnhancedDashboard from "@/pages/dashboard-enhanced"; // New AI Dashboard
+import Library from "@/pages/library"; // New Library Page
+// import Documents from "@/pages/documents"; // Replaced by Library
 import Flashcards from "@/pages/flashcards";
 import NotFound from "@/pages/not-found";
 
@@ -21,8 +23,8 @@ function Router() {
       ) : (
         <>
           <Route path="/" component={Home} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/documents" component={Documents} />
+          <Route path="/dashboard" component={EnhancedDashboard} />
+          <Route path="/library" component={Library} />
           <Route path="/flashcards" component={Flashcards} />
         </>
       )}

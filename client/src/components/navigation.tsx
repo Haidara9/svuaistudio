@@ -10,7 +10,7 @@ export default function Navigation() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-secondary to-accent flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-background" />
             </div>
-            <div className="text-xl font-bold gradient-text">SVU Studio</div>
+            <div className="text-xl font-bold gradient-text">Svu Ai Studio</div>
           </div>
           
           <div className="hidden md:flex items-center space-x-8 space-x-reverse">

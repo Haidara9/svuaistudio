@@ -27,23 +27,23 @@ export default function HeroSection() {
 
           {/* Main Tagline */}
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <span className="gradient-text">تعلم بذكاء</span><br />
-            <span className="text-foreground">مع شريكك الدراسي الافتراضي</span>
+            <span className="gradient-text">Svu Ai Studio</span><br />
+            <span className="text-foreground">منصتك الذكية للتعلم المتقدم</span>
           </h1>
 
           {/* Subtitle Taglines */}
           <div className="mb-8 space-y-2 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <p className="text-2xl text-secondary font-semibold" data-testid="text-tagline-impact">
-              التأثير يبدأ من هنا
+              استوديو كامل للدراسة الذكية
             </p>
             <p className="text-lg text-muted-foreground" data-testid="text-tagline-future">
-              من صناعة الخبر… إلى صناعة المستقبل
+              مصدر واحد لكل احتياجات طالب الجامعة الافتراضية
             </p>
           </div>
 
           {/* Description */}
           <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.3s' }}>
-            منصة ذكية مصممة خصيصاً لطلاب الجامعة الافتراضية السورية، تدمج الذكاء الاصطناعي مع أحدث تقنيات التعلم التفاعلي
+            منصة متكاملة تدمج الذكاء الاصطناعي في كل خطوة من خطوات رحلتك الدراسية. من تحليل المواد إلى توليد الأسئلة والاختبارات، مع مساعد ذكي يرافقك طوال الوقت
           </p>
 
           {/* CTA Buttons */}
@@ -54,7 +54,7 @@ export default function HeroSection() {
               data-testid="button-start-trial"
             >
               <i className="fas fa-rocket ml-2"></i>
-              ابدأ التجربة المجانية
+              جرب مجاناً الآن
             </Button>
             <Button 
               variant="outline"

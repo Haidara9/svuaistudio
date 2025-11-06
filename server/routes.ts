@@ -5,7 +5,9 @@ import path from "path";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
 import { aiService } from "./services/aiService";
+import { advancedAiService } from "./services/advancedAiService";
 import { documentService } from "./services/documentService";
+import { registerAdvancedAiRoutes } from "./advancedRoutes";
 import { insertDocumentSchema, insertFlashcardSchema, insertStudySessionSchema } from "@shared/schema";
 
 // Configure multer for file uploads
@@ -225,6 +227,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to check plagiarism" });
     }
   });
+
+  // Register advanced AI routes
+  registerAdvancedAiRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;

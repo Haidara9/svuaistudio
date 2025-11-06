@@ -1,0 +1,6 @@
+nohup: ignoring input
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development node -r dotenv/config node_modules/.bin/tsx server/index.ts
+
+6:17:15 PM [express] serving on port 5000
