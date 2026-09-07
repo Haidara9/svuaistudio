@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ExamBankList } from "@/pages/exam-bank";
 import { useToast } from "@/hooks/use-toast";
 import { Brain, FileText, BookOpen, TrendingUp, Zap } from "lucide-react";
 
@@ -226,7 +227,7 @@ export default function EnhancedDashboard() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
+          <TabsList className="grid w-full grid-cols-5 mb-6">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <Brain className="w-4 h-4" />
               <span className="hidden sm:inline">نظرة عامة</span>
@@ -234,6 +235,10 @@ export default function EnhancedDashboard() {
             <TabsTrigger value="quiz" className="flex items-center gap-2">
               <BookOpen className="w-4 h-4" />
               <span className="hidden sm:inline">توليد الأسئلة</span>
+            </TabsTrigger>
+            <TabsTrigger value="exam-bank" className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4" />
+              <span className="hidden sm:inline">بنك الامتحانات</span>
             </TabsTrigger>
             <TabsTrigger value="study-plan" className="flex items-center gap-2">
               <TrendingUp className="w-4 h-4" />
@@ -326,6 +331,10 @@ export default function EnhancedDashboard() {
           </TabsContent>
 
           {/* Study Plan Tab */}
+          <TabsContent value="exam-bank" className="space-y-4">
+            <ExamBankList />
+          </TabsContent>
+
           <TabsContent value="study-plan" className="space-y-4">
             <Card>
               <CardHeader>

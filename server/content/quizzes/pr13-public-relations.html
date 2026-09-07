@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVU AI STUDIO - Adaptive Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg-color:#050505;--card-bg:#161616;--text-main:#ffffff;--text-secondary:#e0e0e0;--accent-cyan:#00e5ff;--accent-purple:#9d4edd;--accent-red:#ff453a;--accent-green:#30d158;--border-color:#444444;}
+body{font-family:'Cairo',sans-serif;background-color:var(--bg-color);background-image:radial-gradient(circle at 50% 50%,#1a1a2e 0%,#000000 100%);color:var(--text-main);margin:0;padding:20px;min-height:100vh;}
+.container{max-width:950px;margin:0 auto;padding-bottom:80px}
+header{text-align:center;margin-bottom:50px;padding:40px 20px;background:rgba(30,30,30,.7);border:1px solid var(--border-color);border-radius:20px;backdrop-filter:blur(15px);position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.company-tag{font-family:'Orbitron',sans-serif;font-size:.8rem;letter-spacing:6px;color:#fff;text-transform:uppercase;margin-bottom:25px;font-weight:600;display:inline-block;border-bottom:1px solid rgba(0,229,255,.3);padding-bottom:8px;}
+.brand-logo{font-family:'Orbitron',sans-serif;font-size:3em;letter-spacing:2px;color:#fff;margin:0;text-shadow:0 0 15px rgba(255,255,255,.4);text-transform:uppercase}
+.brand-subtitle{font-family:'Orbitron',sans-serif;font-size:.9em;color:var(--accent-purple);letter-spacing:4px;margin-top:5px;margin-bottom:15px;text-transform:uppercase;font-weight:700}
+.zameel-glass {
+  display: inline-block;
+  font-family: 'Orbitron', 'Cairo', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin: 10px auto 20px auto;
+  padding: 8px 35px;
+  background: linear-gradient(135deg, rgba(0, 150, 255, 0.25) 0%, rgba(0, 229, 255, 0.08) 50%, rgba(0, 102, 255, 0.3) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 50px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(0, 119, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.3);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+}
+.from-hedra {font-family:'Orbitron','Cairo',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:5px;margin-top:5px;margin-bottom:30px;text-transform:uppercase;text-shadow:0 0 5px #fff,0 0 10px #fff,0 0 20px var(--accent-cyan),0 0 40px var(--accent-cyan),0 0 80px var(--accent-cyan);animation:neon-pulse 1.5s infinite alternate;}
+@keyframes neon-pulse {0%{text-shadow:0 0 2px #fff,0 0 4px #fff,0 0 6px var(--accent-cyan),0 0 10px var(--accent-cyan),0 0 45px var(--accent-cyan),0 0 55px var(--accent-cyan);}100%{text-shadow:0 0 4px #fff,0 0 11px #fff,0 0 19px var(--accent-cyan),0 0 40px var(--accent-cyan),0 0 80px var(--accent-cyan),0 0 90px var(--accent-cyan);}}
+.section-header{display:flex;align-items:center;background:linear-gradient(90deg,rgba(0,229,255,.15) 0%,transparent 100%);border-right:5px solid var(--accent-cyan);padding:18px 25px;margin:50px 0 30px 0;border-radius:0 10px 10px 0;color:#fff;font-weight:800;font-size:1.5em}
+.card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:16px;padding:35px;margin-bottom:25px;transition:.3s;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+.question-title {font-size: 1.2em;font-weight: bold;margin-bottom: 20px;color: var(--accent-cyan);line-height: 1.6;}
+.options{display:grid;gap:15px}
+.option-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:20px 25px;border-radius:12px;color:#eee;text-align:right;cursor:pointer;font-family:inherit;font-size:1.05em;transition:.2s}
+.option-btn:hover:not([disabled]){background:rgba(0,229,255,.15);border-color:var(--accent-cyan);color:#fff;box-shadow:0 0 20px rgba(0,229,255,.25)}
+.option-btn:disabled{cursor:not-allowed;opacity:.7;}
+.correct{background:rgba(48,209,88,.15)!important;border:2px solid var(--accent-green)!important;color:var(--accent-green)!important}
+.incorrect{background:rgba(255,69,58,.15)!important;border:2px solid var(--accent-red)!important;color:var(--accent-red)!important}
+.essay-input {width: 100%;background: rgba(0,0,0,0.3);border: 1px solid var(--border-color);color: #fff;padding: 15px;border-radius: 8px;font-family: inherit;font-size: 1em;resize: vertical;}
+.essay-input:focus {outline: none;border-color: var(--accent-purple);}
+.footer-result{background:linear-gradient(135deg,#111 0%,#050505 100%);border:1px solid var(--border-color);padding:60px;text-align:center;border-radius:25px;margin-top:80px}
+.final-score-display{font-size:5em;font-weight:900;color:var(--accent-cyan);display:block;margin:20px 0;font-family:'Orbitron',sans-serif}
+.sticky-score{position:fixed;top:20px;left:20px;background:#000;border:2px solid var(--accent-cyan);color:var(--accent-cyan);padding:15px 25px;border-radius:12px;box-shadow:0 0 25px rgba(0,229,255,.2);z-index:1000;font-family:'Orbitron',sans-serif;font-size:1.1em;font-weight:bold;direction:ltr;text-align: center;}
+#start-btn {background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));color: white;border: none;padding: 15px 40px;font-size: 1.2em;font-weight: bold;border-radius: 30px;cursor: pointer;transition: 0.3s;font-family: 'Cairo', sans-serif;margin-bottom: 30px;box-shadow: 0 0 20px rgba(0,229,255,0.4);}
+#start-btn:hover {transform: scale(1.05);box-shadow: 0 0 30px rgba(0,229,255,0.6);}
+.status-badge {display: inline-block;background: rgba(0, 229, 255, 0.1);border: 1px solid var(--accent-cyan);color: var(--accent-cyan);padding: 5px 15px;border-radius: 20px;font-size: 0.9em;margin-bottom: 20px;}
+</style>
+</head>
+<body>
+<div class="sticky-score" id="score-board" style="display:none;">SCORE: <span id="score-counter">0</span>/100<br>TIME: <span id="timer">90:00</span></div>
+<div class="container">
+  <header>
+    <div class="company-tag">GENERATED BY SVU AI STUDIO</div>
+    <div class="brand-logo">SVU EXAM</div>
+    <div class="brand-subtitle">العلاقات العامة: مبادئ وإدارة (PR13) - د. ندى الساعي</div>
+    <div><span class="zameel-glass">ZAMEEL</span></div>
+    <div class="from-hedra">From Hedra</div>
+    <div class="status-badge">تم تحليل المقرر بنجاح ✓</div>
+    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+      تم استخراج هذا الامتحان بدقة أكاديمية صارمة وفق معايير الجامعة الافتراضية السورية (SVU). يتضمن 3 أسئلة مقالية تحليلية، 5 أسئلة صح/خطأ دقيقة، و36 سؤال اختيار من متعدد بمشتتات تخصصية دقيقة.
+    </p>
+  </header>
+  <div style="text-align: center;" id="intro-section"><button id="start-btn" onclick="startExam()">بدء الامتحان التفاعلي</button></div>
+  <div id="quiz-content" style="display: none;"></div>
+  <div class="footer-result" id="result-section" style="display: none;">
+    <h3>النتيجة النهائية (للأسئلة المؤتمتة)</h3>
+    <span class="final-score-display" id="final-score">0</span>
+    <p style="color: var(--text-secondary);">ملاحظة: الأسئلة المقالية تتطلب تصحيحاً أكاديمياً يدوياً (36 سؤال أتمتة × 2 درجة = 72) + (5 أسئلة صح/خطأ × 2 درجة = 10). المجموع المؤتمت: 82 درجة.</p>
+  </div>
+</div>
+<script>
+let score = 0;
+// INJECT YOUR GENERATED QUESTIONS HERE:
+const examData = {
+  essays: [
+    { q: "ناقش بالتفصيل العوامل التاريخية والاقتصادية والاجتماعية الخمسة التي أدت إلى تنامي الاهتمام بالعلاقات العامة كإدارة متخصصة في العصر الحديث، موضحاً التحول الجوهري في قوى السوق من سوق بائعين إلى سوق مشترين ودور الرأي العام في فرض هذا التحول." },
+    { q: "قارن بموضوعية نقدية بين خيار إنشاء إدارة داخلية للعلاقات العامة والاستعانة بمستشار خارجي مستقل، من حيث المعرفة الدقيقة بأسرار المنظمة، والتكلفة المالية، والحياد والموضوعية، والتعامل مع الطوارئ؛ ثم بين المبررات المنهجية التي تدفع المنظمات المعاصرة للجمع بين الخيارين." },
+    { q: "حلل الفروق الجوهرية والحدود الفاصلة بين نشاط العلاقات العامة وكل من: الإعلان التجاري، والدعاية (مع توضيح ألوانها: البيضاء، السوداء، الرمادية)، مبيناً الفلسفة الأخلاقية لاتجاه الاتصال (أحادي الاتجاه مقابل ثنائي الاتجاه) وموقع مصلحة الجماهير في كل منها." }
+  ],
+  tf: [
+    { q: "يُعد إدوارد بيرنيز هو الأب الروحي ورائد العلاقات العامة الذي وضع أولى قواعدها المهنية، بينما يُنسب لإيفي لي ابتداع مصطلح 'مستشار العلاقات العامة' وتأليف كتاب 'بلورة الرأي العام'.", a: 1 },
+    { q: "تتميز الدعاية الرمادية بأنها أكثر ذكاءً وخطورة من الدعاية السوداء؛ لكونها تستند إلى بعض الحقائق المؤكدة وتخلط معها أكاذيب منظمة ومغرضة تصعب على المدقق إدراكها.", a: 0 },
+    { q: "الجيل الثالث من أجيال تطور المسؤولية الاجتماعية (وفق رؤية زاديك) يرى أن المسؤولية هي مجرد مساهمات تبرعية ومساعدات طوعية تمنحها المنظمة من أرباحها الفائضة.", a: 1 },
+    { q: "تُعد التغذية المرتدة الحيادية من أقوى المعززات المحفزة للإبداع والابتكار الوظيفي لدى ممارسي العلاقات العامة داخل المنظمات الحديثة.", a: 1 },
+    { q: "يُشترط في التنظيم الاتصالي النوعي لإدارة العلاقات العامة أن يتم توزيع أقسام العمل الإداري وفق قطاعات الجماهير النوعية (مثل: قسم للمستثمرين، قسم للمستهلكين، قسم للموردين).", a: 0 }
+  ],
+  mcqs: [
+    {
+      q: "أول من استخدم مصطلح 'العلاقات العامة' تاريخياً في عام 1882 خلال خطابه المعنون بـ 'العلاقات العامة وواجبات المهنة القانونية' هو:",
+      opts: ["دومنتون إلتون", "إدوارد بيرنيز", "إيفي لي", "إبراهيم إمام"],
+      a: 0
+    },
+    {
+      q: "الرائد العربي الذي نقل تدريس العلاقات العامة أكاديمياً لطلاب الصحافة بجامعة القاهرة (1957-1958) وأصدر مؤلف 'العلاقات العامة والمجتمع' عام 1959 هو:",
+      opts: ["د. إبراهيم إمام", "د. فريد الصحن", "د. عاطف العبد", "د. محمد صاحب سلطان"],
+      a: 0
+    },
+    {
+      q: "يُعرّف المعهد البريطاني للعلاقات العامة (IPR) هذا النشاط بأنه جهود إدارية مقصودة ومخططة ومستمرة تهدف أساساً إلى:",
+      opts: ["إقامة وتدعيم التفاهم والفهم المتبادل المستمر بين المنظمة وجماهيرها", "زيادة حجم المبيعات الفورية بأقل تكلفة ترويجية ممكنة", "التعتيم الإعلامي على الأزمات والقصور التشغيلي الداخلي", "ممارسة الضغط المباشر على وسائل الإعلام لنشر أخبار مدفوعة"],
+      a: 0
+    },
+    {
+      q: "أكد بول جاريت في تعريفه المرجعي للعلاقات العامة على حقيقة جوهرية تنص على أن العلاقات العامة:",
+      opts: ["ليست وسيلة دفاعية بل جهود مستمرة من الإدارة لكسب الثقة عبر أعمال تحظى بالاحترام", "أداة تكتيكية لتبرير قرارات الإدارة العليا حتى وإن خالفت الصدق والأمانة", "حملة إعلانية مكثفة لتعويض ضعف جودة السلع المنتجة", "ممارسة مقتصرة فقط على إدارة الأزمات والردود القانونية الطارئة"],
+      a: 0
+    },
+    {
+      q: "من أهم نتائج الثورة الصناعية التي أسهمت في ترسيخ دور العلاقات العامة في منظمات الأعمال:",
+      opts: ["التغلب على ندرة عوامل الإنتاج وتحول السوق من سوق بائعين إلى سوق مشترين", "انحسار قوة الرأي العام وتراجع المطالب العمالية والحقوقية", "تراجع حدة المنافسة بين الشركات واختفاء السلع البديلة", "اقتصار نشاط المؤسسات على الاتصال الداخلي المنعزل عن المجتمع"],
+      a: 0
+    },
+    {
+      q: "استعان الملوك الفراعنة ورؤساء القبائل قديماً برجال الدين والكهنة والسحرة لأداء دور العلاقات العامة بهدف:",
+      opts: ["إقناع الجماهير والتأثير على عقائدهم بأن الحاكم يعمل لصالح رفاهيتهم وحمايتهم", "تحصيل الضرائب والمكوس المالية بوسائل الإكراه البدني", "إعداد سجلات حسابية مدققة للأموال العامة والمحاصيل", "تنظيم التدريبات العسكرية الخاصة بالجيوش والكتائب الحربية"],
+      a: 0
+    },
+    {
+      q: "استخدم الأشوريون تقنية اتصالية وإعلامية بارزة للتأثير على الرأي العام وترهيب الأعداء تمثلت في:",
+      opts: ["اللوحات الطينية المعروضة في القاعات والشوارع الكبرى لتروي انتصارات جيوشهم", "خطابات التهنئة المتبادلة بين أمراء الأقاليم", "المناظرات الشعرية في الأسواق الشعبية الموسمية", "الكتب الفلسفية المنسوخة على ورق البردي"],
+      a: 0
+    },
+    {
+      q: "ترجع نشأة وتطور ممارسات الاتصال الجماهيري في الحضارتين اليونانية والرومانية إلى سبب محوري هو:",
+      opts: ["اعتماد استقرار أنظمتهما على كسب ثقة أفراد الشعب وتأييدهم للمبادئ الديمقراطية", "الخوف الدائم من اندلاع الحروب دون مسوغات اقتصادية", "سيطرة الكنيسة ورجال الدين على صياغة القرارات السياسية بالكامل", "حصر الاتصال في اتجاه وحيد ينطلق من القياصرة إلى العبيد حصراً"],
+      a: 0
+    },
+    {
+      q: "في التراث العربي القديم، تجسدت ممارسة العلاقات العامة من خلال مناسبات ملتقيات تداول الأخبار، وكان أبرز أمثلتها:",
+      opts: ["الأسواق الأدبية كسوق عكاظ وموسم الحج حيث كان الشاعر بمثابة لسان القبيلة الإعلامي", "المجالس السرية التي كانت تحظر حضور أفراد العامة", "المراسلات الفردية المقتصرة على شيوخ القبائل", "البعثات الدبلوماسية الدائمة المقيمة في روما وفارس"],
+      a: 0
+    },
+    {
+      q: "الرأسمالي البريطاني الذي دعا في أوائل القرن التاسع عشر إلى الاهتمام بـ 'الآلة البشرية' وتحديد ساعات العمل وتوفير التعليم والوجبات هو:",
+      opts: ["روبرت أوين", "فريدريك تايلور", "هنري غانت", "بيتر دراكر"],
+      a: 0
+    },
+    {
+      q: "أكد هنري غانت (Gantt) في مؤلفه حول تنظيم العمل (1919) على مبدأ مبكر للمسؤولية الاجتماعية نص على أنه:",
+      opts: ["إذا وجد المجتمع أن ثمن وجود المنظمات يفوق نفعها فإن مبرر السماح بوجودها ينتفي", "تعظيم الأرباح المادية هو المسوغ الأخلاقي والقانوني الوحيد لبقاء أي منشأة", "العمال أدوات ميكانيكية لا يحق لهم ممارسة أي نقد لسياسات المنشأة", "الدولة هي المسؤولة حصراً عن معالجة كافة الآثار البيئية والمجتمعية"],
+      a: 0
+    },
+    {
+      q: "وفق تصنيف الأجيال الثلاثة لتطور المسؤولية الاجتماعية (زاديك Zadek)، يمثل الجيل الثاني:",
+      opts: ["جعل المسؤولية الاجتماعية عنصراً رئيسياً ومكملاً لاستراتيجية أعمال المنظمة على المدى البعيد", "الاكتفاء بالمبادرات الفردية والمساعدات الإنسانية الطوعية المتفرقة", "التركيز على تحقيق الأرباح السريعة دون مراعاة قضايا البيئة", "الاندماج التام لحل القضايا الاجتماعية الكبرى بالتعاون مع المنظمات الدولية"],
+      a: 0
+    },
+    {
+      q: "البُعد المسؤول عن تحقيق عائد وربح مالي يمثل القاعدة الأساسية للوفاء ببقية التزامات المنظمة يُسمى البُعد:",
+      opts: ["الاقتصادي", "الأخلاقي", "القانوني", "الخيري التطوعي"],
+      a: 0
+    },
+    {
+      q: "تلتزم المنظمة بـ 'البُعد الخيري' (Philanthropic) في المسؤولية الاجتماعية عندما:",
+      opts: ["تتصرف كمواطن صالح يسهم في دعم وتنمية الموارد المجتمعية وتحسين نوعية الحياة", "تلتزم بتطبيق نصوص القوانين واللوائح الرسمية تفادياً للعقوبات", "تنتج سلعاً بأسعار اقتصادية تحقق لها أعلى تدفق نقدي فوري", "تنشر ميزانياتها السنوية المدققة على موقعها الإلكتروني"],
+      a: 0
+    },
+    {
+      q: "المبدأ الذي يفرض على العلاقات العامة الشفافية والمكاشفة ومحاربة التكتم يُعبر عنه بـ:",
+      opts: ["اتباع سياسة كشف المعلومات الصادقة للجمهور وكسب الثقة بالأفعال", "الدفاع عن أخطاء الإدارة بأساليب الحيل الإعلانية التمويهية", "قصر نشر المعلومات على التقارير الداخلية الخاصة بالمديرين", "تسريب شائعات مدروسة لاختبار ردود أفعال الجمهور المستهدف"],
+      a: 0
+    },
+    {
+      q: "من أهم الفروق الهيكلية بين الإعلان والعلاقات العامة أن الإعلان:",
+      opts: ["رسالة بيعية مدفوعة الأجر تمنح المعلن حق التحكم الكامل في الصياغة ووقت ومكان النشر", "جهد اتصالي يهدف للتعريف بدور المؤسسة المجتمعي دون التركيز على زيادة المبيعات", "وسيلة اتصال مجانية تعتمد كلياً على النشر الصحفي الموضوعي", "عملية اتصالية ثنائية الاتجاه تستهدف قياس ردود الفعل وتعديل الإنتاج"],
+      a: 0
+    },
+    {
+      q: "تعتمد الدعاية البيضاء (White Propaganda) في استراتيجيتها الاتصالية على:",
+      opts: ["مخاطبة العقل والمنطق وعرض الحقائق مع الكشف الصريح عن مصدرها وأهدافها", "إخفاء المصدر الحقيقي وبث الشائعات والأكاذيب المضللة", "تلفيق وقائع مجتزأة تمزج بين المنطق والغرائز الانفعالية", "استخدام وسائل الإعلام السرية وغير القانونية في نقل الرسائل"],
+      a: 0
+    },
+    {
+      q: "تتميز 'الدعاية السوداء' عن غيرها من أشكال الدعاية بأنها:",
+      opts: ["تلجأ لمخاطبة الغرائز وحشد الأكاذيب دون الكشف عن مصدرها أو حقيقة اتجاهاتها وأهدافها", "تعتمد على المنطق الصريح وتكشف عن وثائقها الأصلية للرأي العام", "تلتزم بمبادئ الأخلاق المهنية والتشريعات الإعلامية الصارمة", "تهدف لبناء علاقات إنسانية طويلة المدى ترتكز على الصدق الكامل"],
+      a: 0
+    },
+    {
+      q: "تستعين العلاقات العامة بالإعلان في حالة محددة هي:",
+      opts: ["نشر بيانات وإيضاحات هامة تعذر تغطيتها إخبارياً لضمان إعلام الجمهور بها كما هي", "تحقيق ربح تجاري مباشر وتعويض انخفاض المبيعات الموسمية", "الترويج لبضائع راكدة عبر تقديم عروض تخفيض مضللة", "شراء ولاء الصحفيين ورؤساء التحرير في الوسائل المستهدفة"],
+      a: 0
+    },
+    {
+      q: "يرى فيليب ليزلي (Philip Lesly) أن وظائف العلاقات العامة ترتكز على أربعة محاور أساسية هي:",
+      opts: ["تقديم النصح والمشورة للإدارة، الإعلام، الأبحاث والدراسات، وبناء ودعم الثقة المشتركة", "الإنتاج، التخزين، النقل، والتحصيل المالي", "الرقابة الصارمة، توقيع الجزاءات، التسريح العمالي، والتحقيق", "التصميم الجرافيكي، هندسة الصوت، الطباعة، وتوزيع الملصقات"],
+      a: 0
+    },
+    {
+      q: "من الأهداف الجوهرية للعلاقات العامة الموجهة نحو 'الجمهور الداخلي':",
+      opts: ["تأمين الرضا والاطمئنان المادي والمعنوي وخلق جو من التضامن وإزالة سوء التفاهم", "إقناع المستهلكين الخارجيين بمقاطعة السلع البديلة للمنافسين", "التفاوض مع البنوك لتخفيض فوائد القروض الممنوحة للمؤسسة", "إصدار التشريعات الحكومية المنظمة لأسواق العمل والإنتاج"],
+      a: 0
+    },
+    {
+      q: "تُعرّف عملية 'إدارة القضايا' (Issue Management) بأنها نشاط استراتيجي يتضمن:",
+      opts: ["التحديد المبكر للقضايا العامة ذات التأثير المحتمل وتصميم استجابة مدروسة قبل تفاقمها لأزمة", "معاقبة العاملين الذين يثيرون نقاشات حول سياسات الشركة الداخلية", "إلغاء الاجتماعات العامة للمساهمين تفادياً للمساءلة الرقابية", "التركيز على نفي الأخبار السلبية بعد انتشارها وتأكيدها إعلامياً"],
+      a: 0
+    },
+    {
+      q: "تتكون عملية إدارة القضايا من أربع مراحل متتابعة هي:",
+      opts: ["تحديد القضية، التخطيط ووضع الاستراتيجية، التنفيذ، ثم التقييم", "البحث الميداني، توظيف العمال، الإنتاج الكمي، والتوزيع", "إعلان الأزمة، الاستقالة الجماعية، إغلاق المقرات، وتصفية الأصول", "صياغة الشكوى، رفع الدعوى القضائية، جلسة المرافعة، وصدور الحكم"],
+      a: 0
+    },
+    {
+      q: "تساهم العلاقات العامة في دعم 'الوظيفة المالية' للمؤسسة من خلال دور محوري يتمثل في:",
+      opts: ["إعداد وتجهيز المواد الإعلامية للتقرير المالي السنوي وتدعيم الصلات بالبنوك والمستثمرين", "تحديد أسعار الفائدة المصرفية وإقرار القوائم الختامية للأرباح قانونياً", "جباية الضرائب والرسوم المالية المفروضة على المنشآت الصناعية", "صرف الرواتب اليومية وأجور العمل الإضافي يدوياً داخل المصانع"],
+      a: 0
+    },
+    {
+      q: "تنظيم زيارات دورية للموزعين ومساعديهم إلى مصانع الشركة يُعد مساهمة من العلاقات العامة لدعم الوظيفة:",
+      opts: ["الإنتاجية والتسويقية لرفع الروح المعنوية وشرح السياسات وتلقي مقترحاتهم وملاحظاتهم", "القانونية لتوثيق عقود الرهن التجاري وضمان السداد", "الأمنية لمراقبة خطوط النقل السريع ومستودعات التخزين", "الدعائية الموجهة لإخفاء العيوب المصنعية في خطوط التجميع"],
+      a: 0
+    },
+    {
+      q: "الخطوة الأولى الصارمة في منهجية البحث العلمي المعتمدة في بحوث العلاقات العامة هي:",
+      opts: ["تحديد واختيار المشكلة البحثية بدقة", "تحليل وتفسير الجداول الإحصائية المعقدة", "نشر التوصيات في وسائل الإعلام المحلية", "تكرار التجربة الميدانية لعدة مرات"],
+      a: 0
+    },
+    {
+      q: "يُقصد بـ 'المقياس الكمي' في قياسات الرأي العام التي تجريها العلاقات العامة:",
+      opts: ["التعرف على حجم ردود أفعال الجماهير (الأغلبية، الأقلية، الائتلافي) عبر استطلاعات مقننة", "التحليل الفلسفي للقيم الأخلاقية دون استخدام الأرقام والإحصاءات", "تسجيل المقابلات الشخصية وتفريغ نصوصها بصيغة روائية مطولة", "حساب عدد أجهزة المذياع والتلفزيون المباعة سنوياً في الدولة"],
+      a: 0
+    },
+    {
+      q: "يُعرّف 'الرضا الوظيفي' بأنه الشعور النفسي التفاعلي الناتج عن:",
+      opts: ["مقارنة ما يحصل عليه الفرد فعلياً من وظيفته بما كان يتوقع الحصول عليه من عوائد ومحفزات", "حصول الفرد على ترقية إدارية استثنائية دون بذل مجهود فعلي", "غياب الرقابة الإدارية التام وتمتع الموظف بالحرية المطلقة", "تطابق رغبات الموظف مع تعليمات الإدارة العليا بصورة آلية"],
+      a: 0
+    },
+    {
+      q: "تتضمن عملية 'الإدراك' الإنساني التي تدرسها العلاقات العامة ثلاث عمليات متتابعة هي:",
+      opts: ["الاختيار (الانتقاء)، التنظيم، والتفسير", "الحفظ، النسيان، والاسترجاع", "الدافع، السلوك، والجزاء", "الاستماع، الإقناع، والانقياد"],
+      a: 0
+    },
+    {
+      q: "من الخصائص العلمية الثابتة للسلوك البشري الفردي أنه:",
+      opts: ["سلوك مسبب وله هدف محدد وتحركه دوافع كامنة وهو قابل للتنبؤ والضبط", "سلوك عشوائي وفجائي لا يرتبط بأي مؤثرات داخلية أو بيئية", "صورة طبق الأصل مكررة لسلوك الآخرين دون أي تمايز فردي", "سلوك يسهل تفسيره بيقين مطلق دون أي احتمالية أو شك"],
+      a: 0
+    },
+    {
+      q: "القسم المتخصص في إدارة العلاقات العامة الذي يتولى صياغة البيانات الصحفية وتوزيعها على الصحف يُسمى:",
+      opts: ["قسم الصحافة والإعلام (ضمن أسلوب الاتصال العام)", "قسم التنسيق والرقابة الداخلية", "قسم البحوث والاستعلام المالي", "قسم الخدمات الإدارية والسكرتارية"],
+      a: 0
+    },
+    {
+      q: "من أبرز عيوب إنشاء 'إدارة داخلية' للعلاقات العامة في المنشأة:",
+      opts: ["احتمال تحولها من إدارة استشارية استراتيجية إلى إدارة تنفيذية روتينية تابعة لطلبات الإدارة", "عدم قدرة موظفيها على معرفة أسرار المؤسسة ومشكلاتها الخفية", "ارتفاع تكلفتها المالية المفرطة لكونها لا تتقاضى رواتب شهرية ثابتة", "نظرتها المحايدة المطلقة التي تفتقر للانتماء والولاء للمنظمة"],
+      a: 0
+    },
+    {
+      q: "تتميز الاستعانة بـ 'المستشار الخارجي' المستقل للعلاقات العامة بميزة تنافسية حاسمة هي:",
+      opts: ["النظر للمشكلات بموضوعية وحيادية دون التأثر بالصراعات الداخلية مع امتلاك خبرات واسعة", "معرفته الدقيقة المسبقة بجميع الأسرار الشخصية وغير المعلنة للموظفين", "تواجده الدائم طوال ساعات العمل اليومية داخل مكاتب الشركة", "تقاضيه راتباً شهرياً رمزياً يقل عن أجور العمال المبتدئين"],
+      a: 0
+    },
+    {
+      q: "يُعرّف عنصر 'المرونة' كأحد مقومات التفكير الإبداعي الفعال لدى رجل العلاقات العامة بأنه:",
+      opts: ["قدرة الفرد على تحويل زاوية تفكيره وتعديل أسلوبه لمواجهة الموقف من وضع لآخر", "توليد أكبر عدد ممكن من الكلمات المترادفة في وحدة زمنية معينة", "التمسك الثابت بالحلول التقليدية الجاهزة المعتمدة في اللوائح القديمة", "سرعة التنازل عن المبادئ الأخلاقية للمنظمة عند أول ضغط خارجي"],
+      a: 0
+    },
+    {
+      q: "تُعد 'التغذية المرتدة الإيجابية' في البناء التنظيمي ذات أثر فعال في كونها:",
+      opts: ["معززاً قوياً للإبداع والابتكار لما تحمله من تقدير وثناء ودعم معنوي للممارس", "تحتوي على تعليمات محبطة تحد من حماس الفرد وتوقف مبادراته", "رسائل بيروقراطية روتينية لا تقدم أي معلومات ذات قيمة مضافة", "أداة لفرض العقوبات الإدارية والخصومات المالية على المقصرين"],
+      a: 0
+    },
+    {
+      q: "التقويم الذي يتم أثناء عملية تنفيذ البرنامج الإتصالي للتعرف على مواطن القصور وتلافيها في المراحل المتبقية يُعرف بـ:",
+      opts: ["التقويم الجزئي أو المرحلي", "التقويم النهائي الشامل", "التقويم اللاحق طويل الأجل", "المسح الاستطلاعي النظري"],
+      a: 0
+    }
+  ]
+};
+
+function updateScore() {
+  document.getElementById('score-counter').textContent = score;
+  document.getElementById('final-score').textContent = score;
+}
+function shuffle(arr) {
+  let currentIndex = arr.length, randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+  }
+  return arr;
+}
+function renderQuiz() {
+  const container = document.getElementById('quiz-content');
+  container.innerHTML = '';
+
+  let section1 = document.createElement('div');
+  section1.className = 'section-header';
+  section1.textContent = "القسم الأول: الأسئلة المقالية التحليلية (3 أسئلة - تتطلب إجابة تفصيلية للتصحيح اليدوي)";
+  container.appendChild(section1);
+
+  examData.essays.forEach((item, i) => {
+    let card = document.createElement('div');
+    card.className = 'card';
+    let q = document.createElement('div');
+    q.className = 'question-title';
+    q.textContent = `سؤال مقالي ${i+1}: ${item.q}`;
+    card.appendChild(q);
+    let ta = document.createElement('textarea');
+    ta.rows = 5;
+    ta.className = 'essay-input';
+    ta.placeholder = 'اكتب إجابتك التحليلية الوافية هنا مستنداً إلى محاور المقرر الأكاديمية...';
+    card.appendChild(ta);
+    container.appendChild(card);
+  });
+
+  let section2 = document.createElement('div');
+  section2.className = 'section-header';
+  section2.textContent = "القسم الثاني: أسئلة الصح والخطأ الدقيقة (5 أسئلة × 2 درجة = 10 درجات)";
+  container.appendChild(section2);
+
+  let shuffledTF = [...examData.tf];
+  shuffle(shuffledTF);
+  shuffledTF.forEach((item, i) => {
+    let card = document.createElement('div');
+    card.className = 'card';
+    let q = document.createElement('div');
+    q.className = 'question-title';
+    q.textContent = `سؤال ${i+1}: ${item.q}`;
+    card.appendChild(q);
+    let opts = document.createElement('div');
+    opts.className = 'options';
+    ['صح', 'خطأ'].forEach((o, index) => {
+      let b = document.createElement('button');
+      b.className = 'option-btn';
+      b.textContent = o;
+      b.onclick = function() {
+        if (index === item.a) { b.classList.add('correct'); score += 2; } 
+        else { 
+            b.classList.add('incorrect'); 
+            opts.querySelectorAll('button')[item.a].style.borderColor = "var(--accent-green)";
+            opts.querySelectorAll('button')[item.a].style.color = "var(--accent-green)";
+        }
+        updateScore();
+        opts.querySelectorAll('button').forEach(btn => btn.disabled = true);
+        checkCompletion();
+      };
+      opts.appendChild(b);
+    });
+    card.appendChild(opts);
+    container.appendChild(card);
+  });
+
+  let section3 = document.createElement('div');
+  section3.className = 'section-header';
+  section3.textContent = "القسم الثالث: الاختيار من متعدد بمشتتات دقيقة (36 سؤالاً × 2 درجة = 72 درجة)";
+  container.appendChild(section3);
+
+  let shuffledMCQs = [...examData.mcqs];
+  shuffle(shuffledMCQs);
+  shuffledMCQs.forEach((item, i) => {
+    let card = document.createElement('div');
+    card.className = 'card';
+    let q = document.createElement('div');
+    q.className = 'question-title';
+    q.textContent = `سؤال ${i+1}: ${item.q}`;
+    card.appendChild(q);
+    let opts = document.createElement('div');
+    opts.className = 'options';
+    let correctText = item.opts[item.a];
+    let shuffledOpts = [...item.opts];
+    shuffle(shuffledOpts);
+    shuffledOpts.forEach((o) => {
+      let b = document.createElement('button');
+      b.className = 'option-btn';
+      b.textContent = o;
+      b.onclick = function() {
+        if (o === correctText) { b.classList.add('correct'); score += 2; } 
+        else { 
+            b.classList.add('incorrect'); 
+            opts.querySelectorAll('button').forEach(btn => {
+             if(btn.textContent === correctText) {
+                btn.style.borderColor = "var(--accent-green)";
+                btn.style.color = "var(--accent-green)";
+             }
+          });
+        }
+        updateScore();
+        opts.querySelectorAll('button').forEach(btn => btn.disabled = true);
+        checkCompletion();
+      };
+      opts.appendChild(b);
+    });
+    card.appendChild(opts);
+    container.appendChild(card);
+  });
+}
+
+function checkCompletion() {
+    const allOptions = document.querySelectorAll('.options');
+    let isComplete = true;
+    allOptions.forEach(optDiv => {
+        if(!optDiv.querySelector('button[disabled]')) { isComplete = false; }
+    });
+    if(isComplete) {
+        document.getElementById('result-section').style.display = 'block';
+        clearInterval(timerInterval);
+    }
+}
+
+let duration = 90 * 60;
+let timerInterval;
+function startTimer() {
+  const timerEl = document.getElementById('timer');
+  timerInterval = setInterval(() => {
+    let m = Math.floor(duration / 60);
+    let s = duration % 60;
+    timerEl.textContent = `${m}:${s < 10 ? '0' + s : s}`;
+    if (duration <= 0) {
+      clearInterval(timerInterval);
+      alert('انتهى الوقت المخصص للامتحان!');
+      document.querySelectorAll('.option-btn:not([disabled])').forEach(btn => btn.disabled = true);
+      document.getElementById('result-section').style.display = 'block';
+    }
+    duration--;
+  }, 1000);
+}
+function startExam() {
+    document.getElementById('intro-section').style.display = 'none';
+    document.getElementById('score-board').style.display = 'block';
+    document.getElementById('quiz-content').style.display = 'block';
+    renderQuiz();
+    startTimer();
+}
+</script>
+</body>
+</html>

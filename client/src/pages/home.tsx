@@ -84,6 +84,42 @@ export default function Home() {
             </Card>
           </Link>
 
+          <Link href="/exam-bank">
+            <Card className="hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 cursor-pointer group" data-testid="card-exam-bank">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-3 space-x-reverse">
+                  <div className="w-12 h-12 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <FileText className="w-6 h-6 text-background" />
+                  </div>
+                  <span>بنك الامتحانات</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  امتحانات تفاعلية متاحة للجميع لمدة 48 ساعة من نشرها
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link href="/library">
+            <Card className="hover:shadow-lg hover:shadow-accent/10 transition-all duration-300 cursor-pointer group" data-testid="card-library">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-3 space-x-reverse">
+                  <div className="w-12 h-12 bg-gradient-to-r from-accent to-secondary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <FileText className="w-6 h-6 text-background" />
+                  </div>
+                  <span>المكتبة الجاهزة</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  مستندات وبودكاست صوتي مفتوح بشكل دائم لكل الطلاب
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+
           <Link href="/dashboard">
             <Card className="hover:shadow-lg hover:shadow-secondary/10 transition-all duration-300 cursor-pointer group" data-testid="card-dashboard">
               <CardHeader>
