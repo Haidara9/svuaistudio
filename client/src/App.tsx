@@ -9,6 +9,7 @@ import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
 import EnhancedDashboard from "@/pages/dashboard-enhanced"; // New AI Dashboard
 import Library from "@/pages/library"; // New Library Page
+import ExamBank from "@/pages/exam-bank"; // Exam Bank (48h window quizzes)
 // import Documents from "@/pages/documents"; // Replaced by Library
 import Flashcards from "@/pages/flashcards";
 import NotFound from "@/pages/not-found";
@@ -25,6 +26,7 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/dashboard" component={EnhancedDashboard} />
           <Route path="/library" component={Library} />
+          <Route path="/exam-bank" component={ExamBank} />
           <Route path="/flashcards" component={Flashcards} />
         </>
       )}

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { BookOpen, Download, Trash2, Search, Upload, FileText, Loader } from "lucide-react";
+import ReadyPodcastsSection from "@/components/ready-podcasts-section";
 
 interface Document {
   id: string;
@@ -126,6 +127,9 @@ export default function Library() {
             مستودع شامل لجميع مواد الجامعة الافتراضية السورية
           </p>
         </div>
+
+        {/* المكتبة الجاهزة: بودكاست مفتوح دائماً للجميع */}
+        <ReadyPodcastsSection />
 
         {/* Upload Section */}
         <Card className="mb-8 bg-gradient-to-r from-secondary/10 to-accent/10 border-secondary/20">

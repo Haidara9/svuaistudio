@@ -8,6 +8,7 @@ import { aiService } from "./services/aiService";
 import { advancedAiService } from "./services/advancedAiService";
 import { documentService } from "./services/documentService";
 import { registerAdvancedAiRoutes } from "./advancedRoutes";
+import { registerReadyContentRoutes } from "./readyContentRoutes";
 import { insertDocumentSchema, insertFlashcardSchema, insertStudySessionSchema } from "@shared/schema";
 
 // Configure multer for file uploads
@@ -230,6 +231,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Register advanced AI routes
   registerAdvancedAiRoutes(app);
+
+  // Register exam bank + ready podcast library routes
+  registerReadyContentRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;
