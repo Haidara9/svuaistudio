@@ -27,7 +27,7 @@ function formatRemaining(ms: number): string {
   return `${hours} ساعة و ${minutes} دقيقة`;
 }
 
-export default function ExamBank() {
+export function ExamBankList() {
   const [quizzes, setQuizzes] = useState<ExamBankQuiz[]>([]);
   const [availabilityHours, setAvailabilityHours] = useState(48);
   const [loading, setLoading] = useState(true);
@@ -78,17 +78,11 @@ export default function ExamBank() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="flex items-center gap-3 text-3xl font-bold">
-          <ClipboardList className="h-8 w-8" />
-          بنك الامتحانات
-        </h1>
-        <p className="mt-2 text-muted-foreground">
-          امتحانات تفاعلية متاحة لجميع الطلاب (المجاني والمشترك) لمدة {availabilityHours} ساعة من لحظة
-          النشر، ثم تُقفل تلقائياً.
-        </p>
-      </div>
+    <div>
+      <p className="mb-6 text-sm text-muted-foreground">
+        امتحانات تفاعلية متاحة لجميع الطلاب (المجاني والمشترك) لمدة {availabilityHours} ساعة من لحظة
+        النشر، ثم تُقفل تلقائياً.
+      </p>
 
       {loading ? (
         <div className="flex justify-center py-16">
@@ -144,6 +138,18 @@ export default function ExamBank() {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+export default function ExamBank() {
+  return (
+    <div className="container mx-auto px-4 py-8" dir="rtl">
+      <h1 className="mb-6 flex items-center gap-3 text-3xl font-bold">
+        <ClipboardList className="h-8 w-8" />
+        بنك الامتحانات
+      </h1>
+      <ExamBankList />
     </div>
   );
 }
