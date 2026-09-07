@@ -10,7 +10,9 @@ import {
   READY_PODCASTS,
   QUIZ_AVAILABILITY_HOURS,
   findReadyQuiz,
+  findReadyPodcast,
   getQuizAvailability,
+  drivePreviewUrl,
 } from "@shared/readyContent";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -22,6 +24,18 @@ const QUIZ_ASSETS_DIR = [
   path.join(process.cwd(), "server", "content", "quizzes"),
   path.join(process.cwd(), "dist", "content", "quizzes"),
 ].find((candidate) => fs.existsSync(candidate)) ?? path.join(__dirname, "content", "quizzes");
+
+const PODCAST_ASSETS_DIR = [
+  path.join(__dirname, "content", "podcasts"),
+  path.join(process.cwd(), "server", "content", "podcasts"),
+  path.join(process.cwd(), "dist", "content", "podcasts"),
+].find((candidate) => fs.existsSync(candidate)) ?? path.join(__dirname, "content", "podcasts");
+
+/** هل رُفع الملف الصوتي إلى الخادم؟ */
+function localPodcastPath(localFile: string): string | null {
+  const filePath = path.join(PODCAST_ASSETS_DIR, localFile);
+  return fs.existsSync(filePath) ? filePath : null;
+}
 
 /**
  * حارس الاشتراك: يُستخدم فقط للميزات المدفوعة (توليد بودكاست جديد).
@@ -102,11 +116,39 @@ export function registerReadyContentRoutes(app: Express) {
   // ==========================================================
   app.get("/api/library/podcasts", isAuthenticated, async (_req: Request, res: Response) => {
     res.json({
-      podcasts: READY_PODCASTS.map((podcast) => ({
-        ...podcast,
-        isOpen: true,
-      })),
+      podcasts: READY_PODCASTS.map((podcast) => {
+        // الأفضلية: ملف مستضاف على الخادم، ثم رابط مباشر، ثم مشغّل درايف.
+        const hostedUrl = localPodcastPath(podcast.localFile)
+          ? `/api/library/podcasts/${podcast.slug}/audio`
+          : podcast.audioUrl || "";
+        return {
+          slug: podcast.slug,
+          title: podcast.title,
+          courseCode: podcast.courseCode,
+          description: podcast.description,
+          durationLabel: podcast.durationLabel,
+          publishedAt: podcast.publishedAt,
+          accessTier: podcast.accessTier,
+          audioUrl: hostedUrl,
+          embedUrl: hostedUrl ? "" : drivePreviewUrl(podcast.driveFileId),
+          isOpen: true,
+        };
+      }),
     });
+  });
+
+  // يقدّم الملف الصوتي المستضاف محلياً (إن وُجد) مع دعم الاستماع الجزئي (Range)
+  app.get("/api/library/podcasts/:slug/audio", isAuthenticated, async (req: Request, res: Response) => {
+    const podcast = findReadyPodcast(req.params.slug);
+    if (!podcast) {
+      return res.status(404).json({ message: "الحلقة غير موجودة" });
+    }
+    const filePath = localPodcastPath(podcast.localFile);
+    if (!filePath) {
+      return res.status(404).json({ message: "لا يوجد ملف صوتي مستضاف لهذه الحلقة" });
+    }
+    res.type("audio/mp4");
+    res.sendFile(filePath);
   });
 
   // ==========================================================

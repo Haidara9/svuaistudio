@@ -32,8 +32,12 @@ export interface ReadyPodcast {
   title: string;
   courseCode: string;
   description: string;
-  /** رابط الملف الصوتي (Google Drive / CDN / مسار محلي) */
+  /** رابط صوتي مباشر (CDN أو ملف مستضاف) — يُقدَّم على مشغّل درايف عند توفره. */
   audioUrl: string;
+  /** معرّف الملف على Google Drive — يُستخدم كمشغّل احتياطي مضمون. */
+  driveFileId: string;
+  /** اسم الملف المحلي المتوقع داخل server/content/podcasts (إن رُفع لاحقاً). */
+  localFile: string;
   durationLabel: string;
   publishedAt: string;
   /** "all" = مجاني + مشترك */
@@ -93,6 +97,8 @@ export const READY_PODCASTS: ReadyPodcast[] = [
     description:
       "حلقة صوتية تشرح محاور مقرر العلاقات العامة (PR13) بأسلوب مبسّط ومركّز — متاحة لكل الطلاب بشكل دائم.",
     audioUrl: envValue("PODCAST_PR13_URL") ?? "",
+    driveFileId: "16qUHOETIuT2GC-di_ckzlNITEdHXalTv",
+    localFile: "pr13-public-relations-podcast.m4a",
     durationLabel: "",
     publishedAt: "2026-09-07T00:00:00.000Z",
     accessTier: "all",
@@ -105,6 +111,8 @@ export const READY_PODCASTS: ReadyPodcast[] = [
     description:
       "حلقة صوتية تشرح محاور مقرر إعداد البرامج الإذاعية (RP535) بأسلوب مبسّط ومركّز — متاحة لكل الطلاب بشكل دائم.",
     audioUrl: envValue("PODCAST_RP535_URL") ?? "",
+    driveFileId: "1E_Y1obRjOakgRfMYYcMteGsIURXqSeVu",
+    localFile: "rp535-radio-programs-podcast.m4a",
     durationLabel: "",
     publishedAt: "2026-09-07T00:00:00.000Z",
     accessTier: "all",
@@ -118,6 +126,11 @@ export interface QuizAvailability {
   closesAt: string;
   /** المللي ثانية المتبقية قبل القفل (0 إذا أُقفل). */
   msRemaining: number;
+}
+
+/** رابط مشغّل Google Drive المدمج (يعمل لأي زائر بما أن الملف مشارَك للجميع). */
+export function drivePreviewUrl(driveFileId: string): string {
+  return `https://drive.google.com/file/d/${driveFileId}/preview`;
 }
 
 /** يحسب نافذة الـ 48 ساعة لكويز معيّن. */

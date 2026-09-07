@@ -8,6 +8,7 @@ interface ReadyPodcast {
   courseCode: string;
   description: string;
   audioUrl: string;
+  embedUrl: string;
   durationLabel: string;
 }
 
@@ -70,6 +71,13 @@ export default function ReadyPodcastsSection() {
                   <audio controls preload="none" src={podcast.audioUrl} className="mt-4 w-full">
                     متصفحك لا يدعم تشغيل الملفات الصوتية.
                   </audio>
+                ) : podcast.embedUrl ? (
+                  <iframe
+                    title={podcast.title}
+                    src={podcast.embedUrl}
+                    allow="autoplay"
+                    className="mt-4 h-20 w-full rounded-md border-0"
+                  />
                 ) : (
                   <p className="mt-4 text-sm text-amber-500">
                     الملف الصوتي قيد الرفع — سيظهر المشغّل فور توفره.
